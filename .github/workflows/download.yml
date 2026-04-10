@@ -1,0 +1,21 @@
+name: Docker Image Downloader
+on: [push] # 只要你点提交（Commit），它就会自动运行
+
+jobs:
+  download_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull and Save Image
+        run: |
+          # 1. 从 GitHub 仓库拉取 OpenClaw 镜像
+          docker pull ghcr.io/openclaw/openclaw:latest
+          
+          # 2. 将镜像打包成 tar 文件（这步最关键）
+          docker save ghcr.io/openclaw/openclaw:latest > openclaw.tar
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openclaw-tar-file  # 你下载时的名字
+          path: openclaw.tar       # 刚才生成的文件
+          retention-days: 1        # 下载链接保留1天
