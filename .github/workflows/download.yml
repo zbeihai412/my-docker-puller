@@ -1,21 +1,23 @@
-name: Docker Image Downloader
-on: [push] # 只要你点提交（Commit），它就会自动运行
+name: Push Image to Aliyun
+on: [push]
 
 jobs:
-  download_job:
+  build_and_push:
     runs-on: ubuntu-latest
     steps:
-      - name: Pull and Save Image
+      - name: Login to Aliyun
+        # 这里的域名 crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com 必须和 tag/push 保持一致
+        run: docker login --username=${{ secrets.ALIYUN_USERNAME }} --password=${{ secrets.ALIYUN_PASSWORD }} crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com
+
+      - name: Pull and Retag
         run: |
-          # 1. 从 GitHub 仓库拉取 OpenClaw 镜像
+          # 1. 从 GitHub 拉取原版镜像
           docker pull ghcr.io/openclaw/openclaw:latest
           
-          # 2. 将镜像打包成 tar 文件（这步最关键）
-          docker save ghcr.io/openclaw/openclaw:latest > openclaw.tar
-          
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: openclaw-tar-file  # 你下载时的名字
-          path: openclaw.tar       # 刚才生成的文件
-          retention-days: 1        # 下载链接保留1天
+          # 2. 改名：地址/命名空间/仓库名:标签
+          # 你的命名空间是 moonshift，仓库名是 openclaw
+          docker tag ghcr.io/openclaw/openclaw:latest crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/openclaw:latest
+
+      - name: Push to Aliyun
+        # 3. 推送到阿里云，这个过程是由 GitHub 服务器完成的
+        run: docker push crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/openclaw:latest
