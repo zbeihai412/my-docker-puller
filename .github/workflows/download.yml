@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Aliyun
-        # 这里的域名 crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com 必须和 tag/push 保持一致
+        # 这里的域 名 crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com 必须和 tag/push 保持一致
         run: docker login --username=${{ secrets.ALIYUN_USERNAME }} --password=${{ secrets.ALIYUN_PASSWORD }} crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com
 
       - name: Pull and Retag
