@@ -12,12 +12,12 @@ jobs:
       - name: Pull and Retag
         run: |
           # 1. 从 GitHub 拉取原版镜像
-          docker pull ghcr.io/openclaw/openclaw:2026.3.24
+          docker pull ghcr.io/puppeteer/puppeteer:latest
           
           # 2. 改名：地址/命名空间/仓库名:标签
           # 你的命名空间是 moonshift，仓库名是 openclaw
-          docker tag ghcr.io/openclaw/openclaw:2026.3.24 crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/openclaw:2026.3.24
+          docker tag ghcr.io/puppeteer/puppeteer:latest crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/puppeteer:latest
 
       - name: Push to Aliyun
         # 3. 推送到阿里云，这个过程是由 GitHub 服务器完成的
-        run: docker push crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/openclaw:2026.3.24
+        run: docker push crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/puppeteer:latest
