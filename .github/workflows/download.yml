@@ -16,7 +16,7 @@ jobs:
           
           # 2. 改名：地址/命名空间/仓库名:标签
           # 你的命名空间是 moonshift，仓库名是 openclaw
-          docker tag mcr.microsoft.com/playwright:v1.50.0-noble crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/moonshift/go:1.24-alpine
+          docker tag golang:1.24-alpine crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/moonshift/go:1.24-alpine
 
       - name: Push to Aliyun
         # 3. 推送到阿里云，这个过程是由 GitHub 服务器完成的
