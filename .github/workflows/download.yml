@@ -20,4 +20,4 @@ jobs:
 
       - name: Push to Aliyun
         # 3. 推送到阿里云，这个过程是由 GitHub 服务器完成的
-        run: docker push crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/moonshift/go:1.24-alpine
+        run: docker push crpi-lldf5xbqet88oliy.cn-hangzhou.personal.cr.aliyuncs.com/moonshift/go:1.24-alpine
